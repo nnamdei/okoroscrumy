@@ -1,0 +1,13 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+{% if goals %}
+<ul style="list-style:none;">
+  {% for goal in goals %}
+  <li>{{goal}}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<h2>No goal assigned with daily task status</h2>
+{% endif %}
+</html>
