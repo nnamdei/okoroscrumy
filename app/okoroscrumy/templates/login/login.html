@@ -1,0 +1,11 @@
+{% if messages %} {% for message in messages %}
+<p>{{message}}</p>
+{% endfor %} {% endif %}
+<form action="" method="post">
+{% csrf_token %}
+<label for="username"> Username </label>
+<input type="text" name="username" id="username" placeholder="Username">
+<label for="password"> Password</label>
+<input type="password" name="password" id="password" placeholder="Password">
+<button type="submit">Sign in </button>
+</form>

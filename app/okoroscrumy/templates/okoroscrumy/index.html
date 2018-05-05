@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<div>
+<table border="0.5px solid black">
+<thead>
+<th> </th>
+<th> User</th>
+<th> </th>
+<th> Daily Goals </th>
+<th> Weely Goals </th>
+<th> Verify </th>
+<th> Done </th>
+</thead>
+<tbody>
+{% if users %} {% for user in users %}
+<tr>
+<td><a href="{% url 'okoroscrumy:add_user' %}">+</a></td>
+<td> {{user}} </td>
+<td> <a href="{% url 'okoroscrumy:add_task' %}">+</a> </td>
+<td>
+{% for goal in user.get_daily_goals %} {{ goal }} <br> {% endfor %}
+</td>
+<td>
+{% for goal in user.get_weekly_goals %} {{ goal }} <br> {% endfor %}
+</td>
+<td>
+{% for goal in user.get_verified_goals %} {{ goal }} <br> {% endfor %}
+</td>
+<td>
+{% for goal in user.get_done_goals %} {{ goal }} <br> {% endfor %}
+</td>
+</tr>
+{% endfor %} {% else %}
+<h2>No User found </h2>
+{% endif %}
+</tbody>
+</table>
+</div>
+</html>
