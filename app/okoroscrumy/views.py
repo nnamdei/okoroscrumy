@@ -2,7 +2,10 @@ from django.shortcuts import render,redirect
 from django.http import Http404
 from django.contrib import messages
 from .models import ScrumyGoals,GoalStatus,ScrumyUser
-from .forms import AddUserForm,AddTaskForm,ChangeTaskStatusForm
+from .forms import ChangeTaskStatusForm
+from django.urls import reverse_lazy
+from django.views import generic
+from django.views.generic.edit import CreateView
 
 def index(request):
     users = ScrumyUser.objects.all()
@@ -14,16 +17,11 @@ def get_users(request):
     context = {'users':users}
     return render(request, 'okoroscrumy/users.html', context)
 
-def add_user(request):
-    if request.method == "POST":
-        form = AddUserForm(request.POST)
-        if form.is_valid:
-            form.save()
-            return redirect('okoroscrumy:users')
-        else:
-            form = AddUserForm()
-            context = {'form':form}
-            return render(request, 'okoroscrumy/adduser.html', context)
+class add_user(CreateView):
+
+    model = ScrumyUser
+    fields = '__all__'
+    success_url = '/app'
 
 def dailytask_goals(request):
     status_dt= GoalStatus.objects.get(status='DT')
@@ -39,16 +37,10 @@ def move_goal(request, task_id):
     context = {'goals':goals, 'task_id':task_id}
     return render(request, 'okoroscrumy/goals.html', context)
 
-def add_task(request):
-    if request.method == "POST":
-        form = AddTaskForm(request.POST)
-        if form.is_valid:
-            form.save()
-            return redirect('okoroscrumy:users')
-        else:
-            form = AddTaskForm()
-            context = {'form':form}
-            return render(request, 'okoroscrumy/addtask.html', context)
+class add_task(CreateView):
+    model = ScrumyGoals
+    fields = '__all__'
+    success_url = '/app'
 
 def ChangeTaskStatus(request, goal_id):
     if request.method == "POST":
