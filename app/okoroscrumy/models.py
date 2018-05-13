@@ -34,14 +34,12 @@ class ScrumyUser(models.Model):
 
 class GoalStatus(models.Model):
 	STATUSES = (
-
 		('DT', 'Daily Task'),
         ('WT', 'Weekly Task'),
         ('V', 'Verified'),
         ('D', 'Done'),
-
 	)
-	status = models.CharField(choices=STATUSES, max_length=20, default="Check Status")
+	status = models.CharField(choices=STATUSES, max_length=2)
 	name = models.CharField(max_length=255, default='ScrumStatus')
 
 	def __str__(self):
@@ -55,7 +53,7 @@ class ScrumyGoals(models.Model):
 	date_updated = models.DateTimeField(auto_now=True)
 	task = models.TextField()
 	task_id = models.IntegerField(default=0)
-	moved_by = models.CharField(max_length=60, default='No Movement')
+	moved_by = models.CharField(max_length=60)
 
 	def __str__(self):
 		return self.task

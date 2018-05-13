@@ -10,4 +10,5 @@ urlpatterns = [
     path('adduser/',views.add_user.as_view(),name='add_user'),
     path('addtask/', views.add_task.as_view(), name='add_task'),
     path('<int:goal_id>/changestatus/', views.ChangeTaskStatus, name='change_status'),
+    path('goals/', views.GoalIndexView.as_view(), name='goals'),
 ]

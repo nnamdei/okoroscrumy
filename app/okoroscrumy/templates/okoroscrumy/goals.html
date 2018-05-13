@@ -1,14 +1,7 @@
-{% load staticfiles %}
-<!DOCTYPE html>
-<html lang="en">
-{% if goals %}
-<ul style="list-style:none;">
-  {% for goal in goals %}
-  <li>{{goal}}</li>
-  {% endfor %}
-</ul>
 
-{% else %}
-<h2> No goal assigned to task_id {{task_id}}</h2>
-{% endif %}
-</html>
+<h2>List of Goals</h2>
+<ul>
+{% for goal in object_list %}
+<li>{{goal}}</li>
+{% endfor %}
+</ul>
